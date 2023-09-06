@@ -1,0 +1,14 @@
+.container{
+   display: flex;
+   justify-content: center;
+}
+
+button{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+    background-color: #008CBA;
+    padding: 15px 32px;
+    border-radius: 12px;
+}
