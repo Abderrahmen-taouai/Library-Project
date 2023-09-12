@@ -10,16 +10,26 @@
     <div class="container">
         <div class="library" id="l1">
             
-            <button  id="btn1" type="submit">Add</button>
-            <form id="form1" >
+            <button  id="btn1" type="submit">Add a Book</button>
+            <form id="form1" style="display: none;" >
                 <input type="text" name="title" id="title" placeholder="Title" required="">
                 <input type="text" name="author" id="author" placeholder="Author" required="">
                 <input type="number" min="0" name="pages" id="pages" placeholder="Pages" required="">
-                <input type="submit" name="sub" id="submit" value="Add a Book">
+                <div class="readst">
+                    <br>Read: Y/N</br>
+                    <br>yes</br>
+                    <input type="radio" name="reads" id="yes" value="Yes">
+                    <br>No</br>
+                    <input type="radio" name="reads" id="no" value="No">
+                </div>
 
-            </form>button
+                <input type="submit" name="sub" id="submit" value="Submit">
 
-
+            </form>
+            
+        </div>
+        <div class="library1" id="l2">
+                
         </div>
     </div>
 

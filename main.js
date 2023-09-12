@@ -5,28 +5,35 @@ console.log("sfsdfsdf");
 } */
 
 const myLibrary = [];
-let test =true;
+
 
 let btn=document.getElementById('btn1');
 let forms=document.getElementById('form1');
+const radioButtons = document.querySelectorAll('input[name="reads"]');
 
 
 
-forms.addEventListener("submit",inputs);
+forms.addEventListener("submit",function (e) {
+     e.preventDefault(); 
+     render(); 
+     forms.style.display="none";
 
-function inputs(e){
-    e.preventDefault();  
+});
+btn.addEventListener("click", inputs);
 
-addBookToLibrary(title,author,pages);
+function inputs(){
 
+  forms.style.display="block";
+    addBookToLibrary(title,author,pages);
 
 };
 
-function book(title,author,pages){   
+function book(title,author,pages,readstatus){   
 
     this.title=title;
     this.author=author;
     this.pages=pages;
+    this.readstatus=readstatus;
    };
 
 function addBookToLibrary(){
@@ -34,7 +41,10 @@ function addBookToLibrary(){
     let title=  document.getElementById('title').value.trim();
     let author=  document.getElementById('author').value.trim();
     let pages=  document.getElementById('pages').value.trim();
-    obj= new book(title,author,pages);
+    let readstatus=readstats();
+
+
+    obj= new book(title,author,pages,readstatus);
     myLibrary.push(obj);
      console.log(obj);
         
@@ -42,10 +52,40 @@ function addBookToLibrary(){
    
 };
 
-btn.addEventListener("click",()=>{
+/* btn.addEventListener("click",()=>{
     myLibrary.forEach(element => {
         console.log(element);
         
      }); 
 
-});
+}); */
+
+
+ function readstats(){
+    let selectedSize="";
+   
+ for ( let radioButton of radioButtons) {
+      if (radioButton.checked) {
+        selectedSize = radioButton.value;
+        
+        }   
+}
+
+return selectedSize;
+
+};
+
+function render() {
+  let library=document.getElementById("l2");  
+ for (let i = 0; i < myLibrary.length; i++) {
+    console.log(myLibrary[i]);
+    let book= myLibrary[i];
+    let elemt= document.createElement("div");
+    elemt.innerHTML =`<p>${book.title}</p>`;
+    elemt.className="card";
+    library.appendChild(elemt);
+
+    
+ }
+    
+};

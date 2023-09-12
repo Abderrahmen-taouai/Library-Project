@@ -1,6 +1,42 @@
+*{
+
+    margin: 0;
+    padding: 0;
+}
+
 .container{
    display: flex;
+   gap: 2rem;
    justify-content: center;
+   flex-direction: column;
+   
+}
+
+.library{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: auto;
+    padding-right: auto;
+
+
+}
+
+.library1{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+
+}
+.card{
+    background-color: rgba(248, 218, 179, 0.918);
+    padding: 1 rem;
+    display: inline-block;
 }
 
 button{
@@ -12,3 +48,4 @@ button{
     padding: 15px 32px;
     border-radius: 12px;
 }
+
