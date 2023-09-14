@@ -14,9 +14,11 @@ const radioButtons = document.querySelectorAll('input[name="reads"]');
 
 
 forms.addEventListener("submit",function (e) {
-     e.preventDefault(); 
-     render(); 
-     forms.style.display="none";
+      e.preventDefault(); 
+      addBookToLibrary(title,author,pages);
+      render(); 
+      forms.style.display="none";
+     
 
 });
 btn.addEventListener("click", inputs);
@@ -24,7 +26,8 @@ btn.addEventListener("click", inputs);
 function inputs(){
 
   forms.style.display="block";
-    addBookToLibrary(title,author,pages);
+  
+    
 
 };
 
@@ -75,17 +78,28 @@ return selectedSize;
 
 };
 
-function render() {
-  let library=document.getElementById("l2");  
- for (let i = 0; i < myLibrary.length; i++) {
-    console.log(myLibrary[i]);
-    let book= myLibrary[i];
+function render() { 
+  
+  let library=document.getElementById("l2");
+  library.textContent="";
+  for (let i = 0; i < myLibrary.length; i++) {
+   
+    let book= myLibrary[i];   
     let elemt= document.createElement("div");
-    elemt.innerHTML =`<p>${book.title}</p>`;
+    elemt.innerHTML =`<div><h1>Title: ${book.title}</div> </h1>
+    <div>Author: ${book.author}</div> <div>Pages: ${book.pages}</div>  <div>Read: ${book.readstatus}</div> 
+    <button class="rmvb" onclick="remove(${i})" >Delete</button>`;
     elemt.className="card";
+    elemt.setAttribute("index",i);
     library.appendChild(elemt);
+    
+  }
+    };
+/* 
+    rmvb=document.querySelector('rmvb').addEventListener("click", remove); */
+function remove(i){
 
-    
- }
-    
+ myLibrary.splice(i,1);
+ console.log(i);
+  render();
 };
