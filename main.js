@@ -44,7 +44,7 @@ function addBookToLibrary(){
     let title=  document.getElementById('title').value.trim();
     let author=  document.getElementById('author').value.trim();
     let pages=  document.getElementById('pages').value.trim();
-    let readstatus=readstats();
+    let readstatus= document.getElementById('readcheck').checked;
 
 
     obj= new book(title,author,pages,readstatus);
@@ -55,16 +55,10 @@ function addBookToLibrary(){
    
 };
 
-/* btn.addEventListener("click",()=>{
-    myLibrary.forEach(element => {
-        console.log(element);
-        
-     }); 
-
-}); */
 
 
- function readstats(){
+
+/*  function readstats(){
     let selectedSize="";
    
  for ( let radioButton of radioButtons) {
@@ -76,7 +70,7 @@ function addBookToLibrary(){
 
 return selectedSize;
 
-};
+}; */
 
 function render() { 
   
@@ -87,8 +81,11 @@ function render() {
     let book= myLibrary[i];   
     let elemt= document.createElement("div");
     elemt.innerHTML =`<div><h1>Title: ${book.title}</div> </h1>
-    <div>Author: ${book.author}</div> <div>Pages: ${book.pages}</div>  <div>Read: ${book.readstatus}</div> 
-    <button class="rmvb" onclick="remove(${i})" >Delete</button>`;
+    <div><h2>Author: ${book.author}</h2></div> <div><h5>Pages: ${book.pages}</h5> </div>  
+    <div><h5>Read: ${book.readstatus? "Yes": "No"} </h5></div> 
+    <button class="rmvb" onclick="remove(${i})" >Delete</button> 
+    <button class="rvread" onclick="togleread(${i})" >Change read statut</button>
+     `;
     elemt.className="card";
     elemt.setAttribute("index",i);
     library.appendChild(elemt);
@@ -103,3 +100,12 @@ function remove(i){
  console.log(i);
   render();
 };
+
+book.prototype.togleread= function () {
+  this.readstatus=!this.readstatus;
+};
+
+function togleread(a) {
+  myLibrary[a].togleread();
+  render();
+}

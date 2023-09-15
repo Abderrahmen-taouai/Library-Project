@@ -10,22 +10,30 @@
     <div class="container">
         <div class="library" id="l1">
             
-            <button  id="btn1" type="submit">Add a Book</button>
-            <form id="form1" style="display: none;" >
-                <input type="text" name="title" id="title" placeholder="Title" required="">
-                <input type="text" name="author" id="author" placeholder="Author" required="">
-                <input type="number" min="0" name="pages" id="pages" placeholder="Pages" required="">
-                <div class="readst">
-                    <br>Read: Y/N</br>
-                    <br>yes</br>
-                    <input type="radio" name="reads" id="yes" value="Yes">
-                    <br>No</br>
-                    <input type="radio" name="reads" id="no" value="No">
-                </div>
-
-                <input type="submit" name="sub" id="submit" value="Submit">
-
-            </form>
+            <button  id="btn1" class="btn" type="submit">Add a Book</button>
+            
+                <form id="form1" style="display: none;" >
+                    <div class="formcon">
+                        <div class="items">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" placeholder="Title" required="">
+                        </div>
+                        <div class="items">
+                            <label for="author">Author</label>
+                            <input type="text" name="author" id="author" placeholder="Author" required="">
+                        </div>
+                        <div class="items">
+                            <label for="pages">Pages</label>
+                            <input type="number" min="0" name="pages" id="pages" placeholder="Pages" required="">
+                        </div>
+                        <div class="items">
+                            <label for="readcheck">Read?</label>
+                            <input type="checkbox" name="readcheck" id="readcheck">
+                        </div>
+                        <div class="items"><input type="submit" name="sub" id="submit" value="Submit"></div>
+                    </div>
+                </form>
+            
             
         </div>
         <div class="library1" id="l2">
