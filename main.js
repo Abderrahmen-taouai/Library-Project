@@ -46,27 +46,10 @@ function addBookToLibrary(){
     obj= new book(title,author,pages,readstatus);
     myLibrary.push(obj);
      console.log(obj);
-        
-    
+      
    
 };
 
-
-
-
-/*  function readstats(){
-    let selectedSize="";
-   
- for ( let radioButton of radioButtons) {
-      if (radioButton.checked) {
-        selectedSize = radioButton.value;
-        
-        }   
-}
-
-return selectedSize;
-
-}; */
 
 function render() { 
   
@@ -88,8 +71,7 @@ function render() {
     
   }
     };
-/* 
-    rmvb=document.querySelector('rmvb').addEventListener("click", remove); */
+
 function remove(i){
 
  myLibrary.splice(i,1);
