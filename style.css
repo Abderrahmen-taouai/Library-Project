@@ -5,6 +5,8 @@
   body {
     
     font-family: Arial, sans-serif;
+    background-color: #ddd7d7;
+
   }
   
   .container {
@@ -14,6 +16,7 @@
     grid-template-rows: repeat(4, 1fr);
     grid-gap: 1rem;
   }
+ 
   .sidebuttons{
     align-content: center;
     width: 75%;
