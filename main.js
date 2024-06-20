@@ -37,7 +37,7 @@ function validateForm(event) {
   }
 
   // If all fields are filled, create the book
-  let book = `b${myLibrary.length}`;
+  let book = `book${myLibrary.length}`;
   book = new Book(authorInput, titleInput, pagesInput, readInput);
   addBookToLibrary(book);
   CreateCard(book);
