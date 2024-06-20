@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LIBRARY PROJECT</title>
     <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+    <script src="main.js" defer></script>
+    <title>Library</title>
+  </head>
+  <body>
     <div class="container">
-        <div class="library" id="l1">
-            
-            <button  id="btn1" class="btn" type="submit">Add a Book</button>
-            
-                <form id="form1" style="display: none;" >
-                    <div class="formcon">
-                        <div class="items">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" placeholder="Title" required="">
-                        </div>
-                        <div class="items">
-                            <label for="author">Author</label>
-                            <input type="text" name="author" id="author" placeholder="Author" required="">
-                        </div>
-                        <div class="items">
-                            <label for="pages">Pages</label>
-                            <input type="number" min="0" name="pages" id="pages" placeholder="Pages" required="">
-                        </div>
-                        <div class="items">
-                            <label for="readcheck">Read?</label>
-                            <input type="checkbox" name="readcheck" id="readcheck">
-                        </div>
-                        <div class="items"><input type="submit" name="sub" id="submit" value="Submit"></div>
-                    </div>
-                </form>
-            
-            
+      <div class="sidebuttons">
+        <button data-dialog-show>Add Book</button>
+        <button class="btn-display">Display Books</button>
+        <button class="btn-rest">Rest</button>
+      </div>
+
+      <div class="display"></div>
+      <dialog data-dialog>
+        This is an open dialog window
+        <div class="form">
+          <form id="myForm" action="" method="post">
+            Title: <input type="text" name="Title" required /><br />
+            Author: <input type="text" name="Author" required /><br />
+            Pages: <input type="number" name="Pages" min="1" /><br />
+            Read:
+            <input type="radio" name="option" value="yes" required /> Yes
+            <input type="radio" name="option" value="no" required /> No<br />
+            <button type="submit">Add</button>
+          </form>
         </div>
-        <div class="library1" id="l2">
-                
-        </div>
+        <button data-dialog-close>close</button>
+      </dialog>
     </div>
-
-    
-</body>
-<script src="main.js"></script>
+    <footer>
+      by Abderrahmen Taouai
+      <a href="https://github.com/Abderrahmen-taouai/Project-Calculator-">
+        <br />
+        GitHub
+      </a>
+    </footer>
+  </body>
 </html>
-
