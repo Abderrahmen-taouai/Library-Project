@@ -5,7 +5,7 @@ const dialogClose = document.querySelector("[data-dialog-close]"); // Button to 
 const dialog = document.querySelector("[data-dialog]"); // Dialog element
 const myForm = document.getElementById("myForm"); // Form element
 const submit = document.querySelector('button[type="submit"]'); // Submit button
-const reset = document.querySelector(".btn-rest"); // Reset button
+const reset = document.querySelector(".btn-reset"); // Reset button
 const displaybook = document.querySelector(".btn-display"); // Display books button
 let myLibrary = []; // Array to store books in the library
 
