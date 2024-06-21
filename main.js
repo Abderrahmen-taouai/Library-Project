@@ -21,24 +21,26 @@ function validateForm(event) {
   const titleInput = document.querySelector('input[name="Title"]').value;
   const authorInput = document.querySelector('input[name="Author"]').value;
   const pagesInput = document.querySelector('input[name="Pages"]').value;
-  const readInput = document.querySelector(
-    'input[name="option"]:checked'
-  ).value;
+  const readInput = document.querySelector('input[name="option"]:checked');
 
   // Perform validation
   while (
     titleInput === "" ||
     authorInput === "" ||
     pagesInput === "" ||
-    !readInput
+    readInput === null
   ) {
+    //Disable the submit button
+    submit.disabled = true;
     alert("Please fill out all required fields.");
     return;
   }
 
-  // If all fields are filled, create the book
+  // If all fields are filled,enable submit button and create the book
+  submit.disabled = false;
+
   let book = `book${myLibrary.length}`;
-  book = new Book(authorInput, titleInput, pagesInput, readInput);
+  book = new Book(authorInput, titleInput, pagesInput, readInput.value);
   addBookToLibrary(book);
   CreateCard(book);
   alert("Book added");
@@ -78,6 +80,11 @@ function Book(author, title, pages, read) {
   read === "yes" ? (this.read = "✓") : (this.read = "X");
 }
 
+// Toggle method added to the Book prototype
+Book.prototype.toggle = function () {
+  this.read = this.read === "X" ? "✓" : "X";
+};
+
 // Function to Add Book to Library
 function addBookToLibrary(book) {
   myLibrary.push(book);
@@ -85,27 +92,6 @@ function addBookToLibrary(book) {
 
 // Function to Display Books
 function displayFunc() {
-  myLibrary.forEach((book) => {
-    let index = myLibrary.indexOf(book);
-
-    // Update book details in the display container
-    let title = document.querySelector(`.list${index}`).childNodes[0];
-    title.innerHTML = `<h3>${book.title}</h3>`;
-    let author = document.querySelector(`.list${index}`).childNodes[1];
-    author.textContent = `Author: ${book.author}`;
-    let pages = document.querySelector(`.list${index}`).childNodes[2];
-    pages.textContent = `Pages: ${book.pages}`;
-    let read = document.querySelector(`.list${index}`).childNodes[3];
-    read.textContent = `Read: ${book.read}`;
-
-    // Event Listener for toggling read status
-    let toggleRead = document.querySelector(`.toggleRead${index}`);
-    toggleRead.addEventListener("click", () => {
-      book.read = book.read === "X" ? "✓" : "X";
-      read.textContent = `Read: ${book.read}`;
-    });
-  });
-
   display.classList.remove("hidden");
 }
 
@@ -123,12 +109,20 @@ function CreateCard(book) {
   list.classList.add("list");
   list.classList.add(`list${index}`);
 
+  let a = [book.title, book.author, book.pages, book.read];
+  let labels = ["Title", "Author", "Pages", "Read"];
+  let liElements = [];
   // Create list items for book details
   for (let index = 0; index < 4; index++) {
-    let li = document.createElement("li");
-    li.id = `${index}`;
-    li.textContent = `${index}`;
-    list.appendChild(li);
+    let liElement = document.createElement("li");
+    liElement.id = `${index}`;
+    if (index === 0) {
+      liElement.innerHTML = `<h3>${labels[index]}: ${a[index]}</h3>`;
+    } else {
+      liElement.textContent = `${labels[index]}: ${a[index]}`;
+    }
+    list.appendChild(liElement);
+    liElements.push(liElement);
   }
 
   card.appendChild(list);
@@ -138,7 +132,7 @@ function CreateCard(book) {
   deleteBook.classList.add(`deletebook${index}`);
   deleteBook.textContent = "Remove";
   deleteBook.style =
-    "background-color: #04AA6D; padding: 14px 28px; font-size: 16px;";
+    "background-color: #04AA6D; padding: 1rem 1.5rem; font-size: 1rem;";
 
   // Event Listener for deleting book
   deleteBook.addEventListener("click", () => {
@@ -149,11 +143,16 @@ function CreateCard(book) {
 
   // Button to toggle reading a book
   let toggleRead = document.createElement("button");
-  toggleRead.classList.add(`toggleRead${index}`);
-  toggleRead.textContent = "Change read statut?";
 
+  toggleRead.classList.add(`toggleread${index}`);
+  toggleRead.textContent = "Toggle Read";
   toggleRead.style =
-    "background-color: #04AA6D; padding: 14px 28px; font-size: 16px;";
+    "background-color: #04AA6D; padding: 1rem 1.5rem; font-size: 1rem;";
 
+  // Event Listener for toggling read status
+  toggleRead.addEventListener("click", () => {
+    book.toggle();
+    liElements[3].textContent = `Read: ${book.read}`;
+  });
   card.appendChild(toggleRead);
 }
