@@ -14,21 +14,35 @@
       <div class="sidebuttons">
         <button data-dialog-show>Add Book</button>
         <button class="btn-display">Display Books</button>
-        <button class="btn-reset">Rest</button>
+        <button class="btn-reset">Reset</button>
       </div>
 
       <div class="display"></div>
       <dialog data-dialog>
-        This is an open dialog window
         <div class="form">
           <form id="myForm" action="" method="post">
-            Title: <input type="text" name="Title" required /><br />
-            Author: <input type="text" name="Author" required /><br />
-            Pages: <input type="number" name="Pages" min="1" /><br />
-            Read:
-            <input type="radio" name="option" value="yes" required /> Yes
-            <input type="radio" name="option" value="no" required /> No<br />
-            <button type="submit">Add</button>
+            <div>
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="Title" required />
+            </div>
+            <div>
+              <label for="author">Author:</label>
+              <input type="text" id="author" name="Author" required />
+            </div>
+            <div>
+              <label for="pages">Pages:</label>
+              <input type="number" id="pages" name="Pages" min="1" />
+            </div>
+            <div>
+              Read:
+              <input type="radio" id="yes" name="option" value="yes" required />
+              <label for="yes">Yes</label>
+              <input type="radio" id="no" name="option" value="no" required />
+              <label for="no">No</label>
+            </div>
+            <div>
+              <button type="submit">Add</button>
+            </div>
           </form>
         </div>
         <button data-dialog-close>close</button>
