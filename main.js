@@ -15,44 +15,53 @@ reset.addEventListener("click", () => {
   display.innerHTML = ""; // Clear the display container
 });
 
+let formSubmitted = false; //  to track if form has been submitted
 // Function to Validate Form Input
 function validateForm(event) {
+  event.preventDefault(); // Prevent form submission by default
+
   // Get form input values
-  const titleInput = document.querySelector('input[name="Title"]').value;
-  const authorInput = document.querySelector('input[name="Author"]').value;
-  const pagesInput = document.querySelector('input[name="Pages"]').value;
-  const readInput = document.querySelector('input[name="option"]:checked');
+  let titleInput = document.querySelector('input[name="Title"]').value;
+  let authorInput = document.querySelector('input[name="Author"]').value;
+  let pagesInput = document.querySelector('input[name="Pages"]').value;
+  let readInput = document.querySelector('input[name="option"]:checked');
 
   // Perform validation
-  while (
-    titleInput === "" ||
-    authorInput === "" ||
-    pagesInput === "" ||
-    readInput === null
+  if (
+    // the 1st part: if any conditions are true, it means that at least one required field is empty or the "Read" option is not selected.
+    (titleInput.trim() === "" ||
+      authorInput.trim() === "" ||
+      pagesInput.trim() === "" ||
+      readInput === null) &&
+    //If either formSubmitted is true or all the required fields are empty, the second part of the condition is true.
+    (formSubmitted ||
+      (titleInput.trim() === "" &&
+        authorInput.trim() === "" &&
+        pagesInput.trim() === "" &&
+        readInput === null))
   ) {
-    //Disable the submit button
-    submit.disabled = true;
     alert("Please fill out all required fields.");
+    formSubmitted = true; // Set the flag to true
     return;
+  } else {
+    // If all fields are filled, create the book
+    let book = new Book(authorInput, titleInput, pagesInput, readInput.value);
+    addBookToLibrary(book);
+    CreateCard(book);
+    alert("Book added");
+    myForm.reset();
+    formSubmitted = false; // Reset the flag
+    submit.disabled = true; // Disable submit
   }
-
-  // If all fields are filled,enable submit button and create the book
-  submit.disabled = false;
-
-  let book = `book${myLibrary.length}`;
-  book = new Book(authorInput, titleInput, pagesInput, readInput.value);
-  addBookToLibrary(book);
-  CreateCard(book);
-  alert("Book added");
-  myForm.reset();
 }
 
 // Event Listener for Submit Button
-submit.addEventListener("click", (event) => {
-  event.preventDefault();
-  validateForm(event);
-});
+submit.addEventListener("click", validateForm);
 
+// Event Listener for Form Inputs
+myForm.addEventListener("input", () => {
+  submit.disabled = false; // Enable submit if any input changes
+});
 // Event Listener for Dialog Show Button
 dialogShow.addEventListener("click", () => {
   dialog.showModal();
@@ -132,7 +141,7 @@ function CreateCard(book) {
   deleteBook.classList.add(`deletebook${index}`);
   deleteBook.textContent = "Remove";
   deleteBook.style =
-    "background-color: #04AA6D; padding: 1rem 1.5rem; font-size: 1rem;";
+    "background-color: #04aa6d; padding: 1rem 1.5rem; font-size: 1rem;";
 
   // Event Listener for deleting book
   deleteBook.addEventListener("click", () => {
@@ -147,7 +156,7 @@ function CreateCard(book) {
   toggleRead.classList.add(`toggleread${index}`);
   toggleRead.textContent = "Toggle Read";
   toggleRead.style =
-    "background-color: #04AA6D; padding: 1rem 1.5rem; font-size: 1rem;";
+    "background-color: #04aa6d; padding: 1rem 1.5rem; font-size: 1rem;";
 
   // Event Listener for toggling read status
   toggleRead.addEventListener("click", () => {
