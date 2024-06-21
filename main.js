@@ -13,6 +13,7 @@ let myLibrary = []; // Array to store books in the library
 reset.addEventListener("click", () => {
   myLibrary = []; // Clear the library array
   display.innerHTML = ""; // Clear the display container
+  displayclicked=false; // Reset the flag to false
 });
 
 let formSubmitted = false; //  to track if form has been submitted
@@ -65,16 +66,25 @@ myForm.addEventListener("input", () => {
 // Event Listener for Dialog Show Button
 dialogShow.addEventListener("click", () => {
   dialog.showModal();
+  display.classList.add("hidden");
+
 });
 
 // Event Listener for Dialog Close Button
 dialogClose.addEventListener("click", () => {
   dialog.close();
-});
+  //If already diplay was clicked then keep them open else hide it
+  displayclicked?displayFunc():display.classList.add("hidden");
 
+
+  
+});
+let displayclicked=false;
 // Event Listener for Display Books Button
 displaybook.addEventListener("click", () => {
+
   if (myLibrary.length > 0) {
+    displayclicked=true;
     displayFunc();
   } else {
     alert("No books in the library.");
